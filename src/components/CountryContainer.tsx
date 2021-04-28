@@ -13,8 +13,6 @@ const MainContainer: any = styled(Container)`
 export default function CountryContainer() {
   const countries = useGetCountries();
 
-  console.log(countries);
-
   return (
     <>
       <MainContainer maxWidth="lg">
