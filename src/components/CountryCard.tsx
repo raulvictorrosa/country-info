@@ -29,7 +29,7 @@ export default function CardCountry({ country, to }: any = {}) {
   const CardLink = (props: any) => <Link to={to} {...props} />;
 
   return (
-    <Grid item xs={3}>
+    <Grid item xs={6} sm={4} md={3}>
       <Card className={classes.cardStyle}>
         <CardActionArea
           className={classes.cardLink}
