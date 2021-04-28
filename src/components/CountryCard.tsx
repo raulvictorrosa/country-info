@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 140
     },
     cardLink: {
+      color: 'inherit',
       textDecoration: 'none'
     }
   })
@@ -26,31 +27,30 @@ export default function CardCountry({ country, to }: any = {}) {
   const classes = useStyles();
   const { name, population, region, capital, flag, alpha3Code } = country;
 
-  const CardLink = (props: any) => <Link to={to} {...props} />;
-
   return (
     <Grid item xs={6} sm={4} md={3}>
-      <Card className={classes.cardStyle}>
-        <CardActionArea
-          className={classes.cardLink}
-          component={CardLink}
-          to={`/country/${alpha3Code.toLowerCase()}`}
-        >
-          <CardMedia className={classes.media} image={flag} title={name} />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {name}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              <b>Population:</b> {addCommas(population)}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              <b>Region:</b> {region}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              <b>Capital:</b> {capital}
-            </Typography>
-          </CardContent>
+      <Card className={classes.cardStyle} elevation={3}>
+        <CardActionArea>
+          <Link
+            className={classes.cardLink}
+            to={`/country/${alpha3Code.toLowerCase()}`}
+          >
+            <CardMedia className={classes.media} image={flag} title={name} />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                <b>Population:</b> {addCommas(population)}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                <b>Region:</b> {region}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                <b>Capital:</b> {capital}
+              </Typography>
+            </CardContent>
+          </Link>
         </CardActionArea>
       </Card>
     </Grid>
