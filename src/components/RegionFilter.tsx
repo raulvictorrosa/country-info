@@ -31,7 +31,7 @@ export default function RegionFilter() {
   };
 
   return (
-    <Paper component="form" elevation={3}>
+    <Paper elevation={3}>
       <form noValidate autoComplete="off">
         <div>
           <TextField
