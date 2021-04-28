@@ -11,7 +11,7 @@ const MainContainer: any = styled(Container)`
 `;
 
 export default function CountryContainer() {
-  const countries = useGetCountries();
+  const { countries } = useGetCountries();
 
   return (
     <>
