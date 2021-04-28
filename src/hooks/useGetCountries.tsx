@@ -1,17 +1,33 @@
 import { useEffect, useState } from 'react';
-import CountriesApi from '../api/countries';
+import * as CountriesApi from '../api/countries';
+
+const fetchCountries = async (setCountries: any) => {
+  const { data } = await CountriesApi.getAll();
+
+  setCountries(data);
+};
 
 export const useGetCountries = () => {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    const fetchItems = async () => {
-      const { data } = await CountriesApi.getAll();
+    fetchCountries(setCountries);
+  }, []);
 
-      setCountries(data);
-    };
+  return countries;
+};
 
-    fetchItems();
+const fetchCountriesByRegion = async (region: string, setCountries: any) => {
+  const { data } = await CountriesApi.getAllByRegion(region);
+
+  setCountries(data);
+};
+
+export const useGetCountriesByRegion = (region: string) => {
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    fetchCountriesByRegion(region, setCountries);
   }, []);
 
   return countries;
