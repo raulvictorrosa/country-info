@@ -1,34 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import * as CountriesApi from '../api/countries';
-
-const fetchCountries = async (setCountries: any) => {
-  const { data } = await CountriesApi.getAll();
-
-  setCountries(data);
-};
+import { useCancellablePromise } from '../hooks/useCancellablePromise';
+import { useCountriesContext } from './useCountriesContext';
 
 export const useGetCountries = () => {
-  const [countries, setCountries] = useState([]);
+  const { state, dispatch }: any = useCountriesContext(); // store
+  const { cancellablePromise } = useCancellablePromise();
 
+  // action
   useEffect(() => {
-    fetchCountries(setCountries);
+    const fetchCountries = async () => {
+      const { data }: any = await cancellablePromise(CountriesApi.getAll());
+      dispatch({
+        type: 'FETCH_COUNTRIES',
+        countries: data,
+      });
+    };
+
+    fetchCountries();
   }, []);
 
-  return countries;
-};
+  const { countries } = state;
 
-const fetchCountriesByRegion = async (region: string, setCountries: any) => {
-  const { data } = await CountriesApi.getAllByRegion(region);
-
-  setCountries(data);
-};
-
-export const useGetCountriesByRegion = (region: string) => {
-  const [countries, setCountries] = useState([]);
-
-  useEffect(() => {
-    fetchCountriesByRegion(region, setCountries);
-  }, []);
-
-  return countries;
+  return {
+    countries,
+  };
 };
