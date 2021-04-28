@@ -1,28 +1,25 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { useState } from 'react';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { Route, Switch } from 'react-router-dom';
+import ThemeProvider from '../../providers/ThemeProvider';
+import CountryContainer from '../CountryContainer';
 import Header from '../Header';
-import Home from '../Home';
 
 export default function App() {
-  const [themeState, setThemeState] = useState(false);
-  const palletType = themeState ? 'dark' : 'light';
   const theme = createMuiTheme({
     palette: {
-      type: palletType
+      type: 'dark'
     }
   });
-
-  const handleThemeChange = () => {
-    setThemeState(!themeState);
-  };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header handleThemeChange={handleThemeChange} />
+      <Header />
 
-      <Home />
+      <Switch>
+        <Route path="/" exact component={CountryContainer} />
+      </Switch>
     </ThemeProvider>
   );
 }
