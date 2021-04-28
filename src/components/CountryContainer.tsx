@@ -24,11 +24,11 @@ export default function CountryContainer() {
           justify="space-between"
           alignItems="flex-start"
         >
-          <Grid item xs={3}>
+          <Grid item xs={6} sm={6} md={3}>
             <SearchField />
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={5} sm={5} md={3} lg={2}>
             <RegionFilter />
           </Grid>
         </Grid>
