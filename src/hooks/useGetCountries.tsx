@@ -53,13 +53,15 @@ type InitialState = {
   isLoading: boolean;
   error: any;
   search: string;
+  filter: string;
 };
 
 const initialState = {
   countries: [],
   isLoading: true,
   error: null,
-  search: ''
+  search: '',
+  filter: ''
 };
 
 type ReducerActionTypes =
@@ -68,6 +70,9 @@ type ReducerActionTypes =
     }
   | {
       type: 'GET_COUNTRIES_SEARCH';
+    }
+  | {
+      type: 'GET_COUNTRIES_BY_REGION';
     }
   | {
       type: 'GET_COUNTRIES_SUCCESS';
@@ -80,6 +85,10 @@ type ReducerActionTypes =
   | {
       type: 'SET_SEARCH_TEXT';
       payload: { search: string };
+    }
+  | {
+      type: 'SET_FILTER_TEXT';
+      payload: { filter: string };
     };
 
 const reducer = (
@@ -92,9 +101,12 @@ const reducer = (
     }
     case 'GET_COUNTRIES_SEARCH': {
       return {
-        ...state,
-        isLoading: false,
-        error: null
+        ...state
+      };
+    }
+    case 'GET_COUNTRIES_BY_REGION': {
+      return {
+        ...state
       };
     }
     case 'GET_COUNTRIES_SUCCESS': {
@@ -119,6 +131,13 @@ const reducer = (
         search: action.payload.search
       };
     }
+    case 'SET_FILTER_TEXT': {
+      return {
+        ...state,
+        isLoading: false,
+        filter: action.payload.filter
+      };
+    }
     default: {
       return { ...state };
     }
@@ -130,15 +149,23 @@ export const useGetCountries = () => {
 
   useEffect(() => {
     const fetchCountries = async () => {
+      let countries = [];
       try {
-        !state.search
-          ? dispatch({ type: 'GET_COUNTRIES' })
-          : dispatch({ type: 'GET_COUNTRIES_SEARCH' });
+        if (state.search || !state.filter) {
+          !state.search
+            ? dispatch({ type: 'GET_COUNTRIES' })
+            : dispatch({ type: 'GET_COUNTRIES_SEARCH' });
 
-        const { data: countries }: any = await CountriesApi.getAll(
-          state.search
-        );
-        // console.log('data:', countries);
+          const { data }: any = await CountriesApi.getAll(state.search);
+          countries = data;
+        }
+
+        if (state.filter) {
+          dispatch({ type: 'GET_COUNTRIES_BY_REGION' });
+          const { data }: any = await CountriesApi.getAllByRegion(state.filter);
+          countries = data;
+        }
+
         dispatch({ type: 'GET_COUNTRIES_SUCCESS', payload: { countries } });
       } catch (e) {
         dispatch({ type: 'GET_COUNTRIES_ERROR', payload: { error: e } });
@@ -146,7 +173,7 @@ export const useGetCountries = () => {
     };
 
     fetchCountries();
-  }, [dispatch, state.search]);
+  }, [dispatch, state.search, state.filter]);
 
   const setSearchText = useCallback(
     (text: string) => {
@@ -155,5 +182,12 @@ export const useGetCountries = () => {
     [dispatch]
   );
 
-  return { state, actions: { setSearchText } };
+  const setFilterText = useCallback(
+    (text: string) => {
+      dispatch({ type: 'SET_FILTER_TEXT', payload: { filter: text } });
+    },
+    [dispatch]
+  );
+
+  return { state, actions: { setSearchText, setFilterText } };
 };
