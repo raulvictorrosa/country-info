@@ -1,52 +1,23 @@
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-// import { useEffect, useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { useGetCountry } from '../../hooks/useGetCountry';
+import {
+  ButtonBorders,
+  GridCustom,
+  Img,
+  ListInfo,
+  ListItemInfo,
+  MainContainer,
+  TextBorderCountries
+} from '../CountrySingle/styled';
 
-const MainContainer: any = styled(Container)`
-  margin-top: 80px;
-`;
-
-const GridCustom: any = styled(Grid)`
-  margin-top: 80px;
-`;
-
-const ListInfo: any = styled(List)`
-  padding-top: 0;
-  padding-bottom: 0;
-`;
-
-const ListItemInfo: any = styled(ListItem)`
-  padding-top: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-`;
-
-const TextBorderCountries: any = styled(Typography)`
-  margin-right: 30px;
-`;
-
-const ButtonBorders: any = styled(Button)`
-  color: inherit;
-  border: 1px solid;
-`;
-
-const Img: any = styled.img`
-  width: 100%;
-`;
-
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     button: {
       color: 'inherit'
@@ -155,6 +126,22 @@ const CountrySingle = ({ match }: any) => {
               <ButtonBorders
                 variant="outlined"
                 // size="medium"
+                component={Link}
+                to="/"
+              >
+                Iran
+              </ButtonBorders>
+              <ButtonBorders
+                variant="outlined"
+                size="medium"
+                component={Link}
+                to="/"
+              >
+                Iran
+              </ButtonBorders>
+              <ButtonBorders
+                variant="outlined"
+                size="medium"
                 component={Link}
                 to="/"
               >
