@@ -1,11 +1,11 @@
 import Paper from '@material-ui/core/Paper';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     inputRoot: {
       width: '100%'
@@ -21,14 +21,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function RegionFilter() {
+type FilterFieldProps = {
+  onFilter: (text: string) => void;
+};
+
+const RegionFilter: React.FC<FilterFieldProps> = ({ onFilter }) => {
   const classes = useStyles();
+  const [filter, setFilter] = useState('');
 
-  const [region, setRegion] = useState('');
-
-  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRegion(event.target.value);
-  };
+  useEffect(() => onFilter(filter), [onFilter, filter]);
 
   return (
     <Paper elevation={3}>
@@ -38,19 +39,15 @@ export default function RegionFilter() {
             id="filter-by-region"
             select
             label="Filter by Region"
-            value={region}
-            onChange={handleFilter}
-            classes={{
-              root: classes.inputRoot
-            }}
-            SelectProps={{
-              native: true
-            }}
+            classes={{ root: classes.inputRoot }}
+            SelectProps={{ native: true }}
             variant="outlined"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
           >
             <option aria-label="None" value="" />
             {regions.map((option) => (
-              <option key={option} value={option}>
+              <option key={option.toLowerCase()} value={option.toLowerCase()}>
                 {option}
               </option>
             ))}
@@ -59,4 +56,6 @@ export default function RegionFilter() {
       </form>
     </Paper>
   );
-}
+};
+
+export default RegionFilter;
