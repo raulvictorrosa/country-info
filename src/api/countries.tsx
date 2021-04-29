@@ -8,4 +8,4 @@ export const getAll = (text: string) =>
     : axios.get(`${REACT_APP_API_COUNTRIES}/name/${text}`);
 
 export const getAllByRegion = (region: string) =>
-  axios.get(`${REACT_APP_API_COUNTRIES}/region${region}`);
+  axios.get(`${REACT_APP_API_COUNTRIES}/region/${region}`);
