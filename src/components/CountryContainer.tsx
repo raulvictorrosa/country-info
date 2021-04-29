@@ -11,7 +11,7 @@ const MainContainer: any = styled(Container)`
 `;
 
 export default function CountryContainer() {
-  const { countries } = useGetCountries();
+  const { state, actions } = useGetCountries();
 
   return (
     <>
@@ -23,7 +23,7 @@ export default function CountryContainer() {
           alignItems="flex-start"
         >
           <Grid item xs={6} sm={6} md={3}>
-            <SearchField />
+            <SearchField onSearch={actions.setSearchText} />
           </Grid>
 
           <Grid item xs={5} sm={5} md={3} lg={2}>
@@ -32,7 +32,9 @@ export default function CountryContainer() {
         </Grid>
       </MainContainer>
 
-      <CountryCards countries={countries} />
+      {!state.error && !state.isLoading && (
+        <CountryCards countries={state.countries} />
+      )}
     </>
   );
 }
