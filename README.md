@@ -1,8 +1,8 @@
-# Getting with this project
+# Getting started with this project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and was deployed with [Vercel](https://vercel.com/).
 
-## To use this project
+## Development environment and deployment
 
 For development mode you need to create an `.env` and set the variable `REACT_APP_API_COUNTRIES=https://restcountries.eu/rest/v2`
 , after install de dependencies with the command `yarn` and in sequence run the command `yarn start` it will start your development environment.
