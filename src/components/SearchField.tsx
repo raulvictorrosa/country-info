@@ -3,6 +3,8 @@ import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import { useEffect, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,8 +22,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function SearchField() {
+type SearchFieldProps = {
+  onSearch: (text: string) => void;
+};
+
+const SearchField: React.FC<SearchFieldProps> = ({ onSearch }) => {
   const classes = useStyles();
+  const [search, setSearch] = useState('');
+  const [textToSearch] = useDebounce(search, 1000);
+
+  useEffect(() => {
+    onSearch(textToSearch);
+  }, [onSearch, textToSearch]);
 
   return (
     <Paper component="form" className={classes.searchForm} elevation={3}>
@@ -34,12 +46,17 @@ export default function SearchField() {
       </IconButton>
       <InputBase
         id="search-field"
+        value={search}
+        name="search"
         classes={{
           root: classes.inputRoot
         }}
         placeholder="Search for a country..."
         inputProps={{ 'aria-label': 'Search for a country...' }}
+        onChange={(e) => setSearch(e.target.value)}
       />
     </Paper>
   );
-}
+};
+
+export default SearchField;
