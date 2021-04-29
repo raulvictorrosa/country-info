@@ -27,7 +27,7 @@ export default function CountryContainer() {
           </Grid>
 
           <Grid item xs={5} sm={5} md={3} lg={2}>
-            <RegionFilter />
+            <RegionFilter onFilter={actions.setFilterText} />
           </Grid>
         </Grid>
       </MainContainer>
