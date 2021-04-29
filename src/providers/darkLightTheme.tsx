@@ -17,7 +17,7 @@ const DarkLightTheme = React.createContext<DarkLightThemeInitialValue>(
 );
 
 const DarkLightThemeProvider: React.FC = ({ children }) => {
-  const [themeMode, setThemeMode] = useState<PaletteType>('light');
+  const [themeMode, setThemeMode] = useState<PaletteType>('dark');
 
   const contextData = useMemo(
     () => ({
