@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import styled from 'styled-components';
-import { useChangeTheme } from '../providers/ThemeProvider';
+import { useDarkLightTheme } from '../providers/darkLightTheme';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,7 +40,7 @@ const ThemeSwitcherTitle: any = styled(Typography)`
 export default function Header() {
   const theme = useTheme();
   const classes = useStyles();
-  const changeTheme = useChangeTheme();
+  const { actions } = useDarkLightTheme();
 
   return (
     <div className={classes.grow}>
@@ -56,7 +56,7 @@ export default function Header() {
             <IconButton
               aria-label="change to dark mode"
               color="inherit"
-              onClick={() => changeTheme()}
+              onClick={() => actions.toggleTheme()}
             >
               {theme.palette.type === 'light' ? (
                 <>
@@ -80,7 +80,7 @@ export default function Header() {
             <IconButton
               aria-label="change to dark mode"
               color="inherit"
-              onClick={() => changeTheme()}
+              onClick={() => actions.toggleTheme()}
             >
               {theme.palette.type === 'light' ? (
                 <Brightness4Icon />
