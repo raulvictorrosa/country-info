@@ -11,7 +11,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useGetCountry } from '../hooks/useGetCountry';
+import { useGetCountry } from '../../hooks/useGetCountry';
 
 const MainContainer: any = styled(Container)`
   margin-top: 80px;
