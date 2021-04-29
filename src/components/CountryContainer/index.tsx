@@ -1,10 +1,10 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
-import { useGetCountries } from '../hooks/useGetCountries';
-import CountryCards from './CountryCards';
-import RegionFilter from './RegionFilter';
-import SearchField from './SearchField';
+import { useGetCountries } from '../../hooks/useGetCountries';
+import CountryCards from '../CountryCards';
+import RegionFilter from '../RegionFilter';
+import SearchField from '../SearchField';
 
 const MainContainer: any = styled(Container)`
   margin-top: 40px;
