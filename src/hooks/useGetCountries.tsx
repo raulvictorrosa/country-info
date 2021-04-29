@@ -67,6 +67,9 @@ type ReducerActionTypes =
       type: 'GET_COUNTRIES';
     }
   | {
+      type: 'GET_COUNTRIES_SEARCH';
+    }
+  | {
       type: 'GET_COUNTRIES_SUCCESS';
       payload: { countries: Country[] };
     }
@@ -86,6 +89,13 @@ const reducer = (
   switch (action.type) {
     case 'GET_COUNTRIES': {
       return { ...state, ...initialState };
+    }
+    case 'GET_COUNTRIES_SEARCH': {
+      return {
+        ...state,
+        isLoading: false,
+        error: null
+      };
     }
     case 'GET_COUNTRIES_SUCCESS': {
       return {
@@ -121,9 +131,14 @@ export const useGetCountries = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        dispatch({ type: 'GET_COUNTRIES' });
-        const { data: countries }: any = await CountriesApi.getAll();
-        console.log('data:', countries);
+        !state.search
+          ? dispatch({ type: 'GET_COUNTRIES' })
+          : dispatch({ type: 'GET_COUNTRIES_SEARCH' });
+
+        const { data: countries }: any = await CountriesApi.getAll(
+          state.search
+        );
+        // console.log('data:', countries);
         dispatch({ type: 'GET_COUNTRIES_SUCCESS', payload: { countries } });
       } catch (e) {
         dispatch({ type: 'GET_COUNTRIES_ERROR', payload: { error: e } });
@@ -131,7 +146,7 @@ export const useGetCountries = () => {
     };
 
     fetchCountries();
-  }, [dispatch]);
+  }, [dispatch, state.search]);
 
   const setSearchText = useCallback(
     (text: string) => {

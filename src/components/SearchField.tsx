@@ -41,6 +41,7 @@ const SearchField: React.FC<SearchFieldProps> = ({ onSearch }) => {
         type="submit"
         className={classes.searchIcon}
         aria-label="search"
+        onClick={(e) => e.preventDefault()}
       >
         <SearchIcon />
       </IconButton>
