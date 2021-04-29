@@ -1,7 +1,7 @@
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
-import CountryCard from './CountryCard';
+import CountryCard from '../CountryCard';
 
 const MainContainer: any = styled(Container)`
   margin-top: 40px;

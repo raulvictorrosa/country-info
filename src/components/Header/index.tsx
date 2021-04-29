@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import styled from 'styled-components';
-import { useDarkLightTheme } from '../providers/darkLightTheme';
+import { useDarkLightTheme } from '../../providers/darkLightTheme';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
