@@ -1,7 +1,16 @@
-import TextField from '@material-ui/core/TextField';
+import {
+  Paper as PaperStyled,
+  TextField as TextFieldStyled
+} from '@material-ui/core';
 import styled from 'styled-components';
 
-export const TextFieldRegion = styled(TextField)`
+export const Paper = styled(PaperStyled)`
+  @media (max-width: 599px) {
+    margin-top: 20px;
+  }
+`;
+
+export const TextField = styled(TextFieldStyled)`
   width: 100%;
 
   .MuiFormLabel-root.Mui-focused {

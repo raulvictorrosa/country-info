@@ -1,6 +1,5 @@
-import Paper from '@material-ui/core/Paper';
 import { useEffect, useState } from 'react';
-import { TextFieldRegion } from '../RegionFilter/styled';
+import { Paper, TextField } from '../RegionFilter/styled';
 
 const regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
@@ -17,7 +16,7 @@ const RegionFilter: React.FC<FilterFieldProps> = ({ onFilter }) => {
     <Paper elevation={3}>
       <form noValidate autoComplete="off">
         <div>
-          <TextFieldRegion
+          <TextField
             id="filter-by-region"
             select
             label="Filter by Region"
@@ -32,7 +31,7 @@ const RegionFilter: React.FC<FilterFieldProps> = ({ onFilter }) => {
                 {option}
               </option>
             ))}
-          </TextFieldRegion>
+          </TextField>
         </div>
       </form>
     </Paper>
