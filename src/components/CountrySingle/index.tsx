@@ -1,12 +1,12 @@
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import ListItemText from '@material-ui/core/ListItemText';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useGetCountry } from '../../hooks/useGetCountry';
+import * as CountryApi from '../../api/country';
+import { addCommas } from '../../utils';
 import {
   ButtonBorders,
   GridCustom,
@@ -17,27 +17,36 @@ import {
   TextBorderCountries
 } from '../CountrySingle/styled';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    button: {
-      color: 'inherit'
-    }
-  })
-);
+const initialState = {
+  borders: [],
+  capital: '',
+  currencies: [],
+  flag: '',
+  languages: [],
+  name: '',
+  nativeName: '',
+  population: 0,
+  region: '',
+  subregion: '',
+  topLevelDomain: []
+};
 
 const CountrySingle = ({ match }: any) => {
-  const classes = useStyles();
+  const [country, setCountry] = useState(initialState);
+  const { borders } = country;
   const { id } = match.params;
-  const {
-    state,
-    actions: { setAlpha3 }
-  } = useGetCountry();
 
   useEffect(() => {
-    setAlpha3(id);
-  }, [id, setAlpha3]);
+    const fetchCountry = async () => {
+      const { data: country }: any = await CountryApi.getByAlpha(id);
+      setCountry(country);
+    };
 
-  console.log('state: ', state);
+    fetchCountry();
+  }, [id, country]);
+
+  const arrayNameByComma = (teste: any) =>
+    teste.map((item: any) => item.name).join(', ');
 
   return (
     <MainContainer maxWidth="lg">
@@ -54,7 +63,6 @@ const CountrySingle = ({ match }: any) => {
             component={Link}
             to="/"
             startIcon={<ArrowBackIcon />}
-            className={classes.button}
           >
             Back
           </Button>
@@ -68,10 +76,10 @@ const CountrySingle = ({ match }: any) => {
         alignItems="flex-start"
       >
         <Grid item xs={5}>
-          <Img src="https://restcountries.eu/data/irl.svg" alt="Ireland" />
+          <Img src={country.flag} alt={country.name} />
         </Grid>
         <Grid item xs={5}>
-          <Typography variant="h4">Ireland</Typography>
+          <Typography variant="h4">{country.name}</Typography>
           <Grid
             container
             direction="row"
@@ -81,19 +89,21 @@ const CountrySingle = ({ match }: any) => {
             <Grid item xs={6}>
               <ListInfo>
                 <ListItemInfo>
-                  <ListItemText>Native Name: Éire</ListItemText>
+                  <ListItemText>Native Name: {country.nativeName}</ListItemText>
                 </ListItemInfo>
                 <ListItemInfo>
-                  <ListItemText>Population: 6, 378, 000</ListItemText>
+                  <ListItemText>
+                    Population: {addCommas(country.population)}
+                  </ListItemText>
                 </ListItemInfo>
                 <ListItemInfo>
-                  <ListItemText>Region: Europe</ListItemText>
+                  <ListItemText>Region: {country.region}</ListItemText>
                 </ListItemInfo>
                 <ListItemInfo>
-                  <ListItemText>Subregion: Northern Europe </ListItemText>
+                  <ListItemText>Subregion: {country.subregion}</ListItemText>
                 </ListItemInfo>
                 <ListItemInfo>
-                  <ListItemText>Capital: Dublin</ListItemText>
+                  <ListItemText>Capital: {country.capital}</ListItemText>
                 </ListItemInfo>
               </ListInfo>
             </Grid>
@@ -101,13 +111,19 @@ const CountrySingle = ({ match }: any) => {
             <Grid item xs={6}>
               <ListInfo>
                 <ListItemInfo>
-                  <ListItemText>Top Level Domain: .ie</ListItemText>
+                  <ListItemText>
+                    Top Level Domain: {country.topLevelDomain.join(', ')}
+                  </ListItemText>
                 </ListItemInfo>
                 <ListItemInfo>
-                  <ListItemText>Currencies: Euro</ListItemText>
+                  <ListItemText>
+                    Currencies: {arrayNameByComma(country.currencies)}
+                  </ListItemText>
                 </ListItemInfo>
                 <ListItemInfo>
-                  <ListItemText>Languages: Irish, English</ListItemText>
+                  <ListItemText>
+                    Languages: {arrayNameByComma(country.languages)}
+                  </ListItemText>
                 </ListItemInfo>
               </ListInfo>
             </Grid>
@@ -123,46 +139,22 @@ const CountrySingle = ({ match }: any) => {
               <TextBorderCountries variant="body1" component="span">
                 Border Countries:
               </TextBorderCountries>
-              <ButtonBorders
-                variant="outlined"
-                // size="medium"
-                component={Link}
-                to="/"
-              >
-                Iran
-              </ButtonBorders>
-              <ButtonBorders
-                variant="outlined"
-                size="medium"
-                component={Link}
-                to="/"
-              >
-                Iran
-              </ButtonBorders>
-              <ButtonBorders
-                variant="outlined"
-                size="medium"
-                component={Link}
-                to="/"
-              >
-                Iran
-              </ButtonBorders>
-              <ButtonBorders
-                variant="outlined"
-                size="medium"
-                component={Link}
-                to="/"
-              >
-                Iran
-              </ButtonBorders>
-              <ButtonBorders
-                variant="outlined"
-                size="medium"
-                component={Link}
-                to="/"
-              >
-                Iran
-              </ButtonBorders>
+              {borders && borders.length > 0 ? (
+                borders.map((border: any) => (
+                  <ButtonBorders
+                    key={border}
+                    variant="outlined"
+                    component={Link}
+                    to={`/country/${border.toLowerCase()}`}
+                  >
+                    {border}
+                  </ButtonBorders>
+                ))
+              ) : (
+                <ButtonBorders variant="outlined" disabled>
+                  No Border Country
+                </ButtonBorders>
+              )}
             </Grid>
           </GridCustom>
         </Grid>
