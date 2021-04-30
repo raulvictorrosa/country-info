@@ -1,18 +1,14 @@
-import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { addCommas } from '../../utils';
+import { Card, Grid } from '../CountryCard/styled';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    cardStyle: {
-      maxWidth: 268
-    },
     media: {
       height: 140
     },
@@ -28,8 +24,8 @@ export default function CardCountry({ country, to }: any = {}) {
   const { name, population, region, capital, flag, alpha3Code } = country;
 
   return (
-    <Grid item xs={6} sm={4} md={3}>
-      <Card className={classes.cardStyle} elevation={3}>
+    <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Card elevation={3}>
         <CardActionArea>
           <Link
             className={classes.cardLink}
