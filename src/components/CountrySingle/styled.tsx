@@ -27,7 +27,10 @@ export const ListItemInfo: any = styled(ListItem)`
 `;
 
 export const TextBorderCountries: any = styled(Typography)`
-  margin-right: 30px;
+  margin-right: 20px;
+  vertical-align: top;
+  top: 5px;
+  position: relative;
 `;
 
 export const Img: any = styled.img`
@@ -38,6 +41,7 @@ export const ButtonBorders: any = styled(Button)`
   color: inherit;
   border: 1px solid;
   margin-right: 10px;
+  margin-bottom: 15px;
   &:last-of-type {
     margin-right: 0;
   }
