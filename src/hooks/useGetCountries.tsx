@@ -14,38 +14,20 @@ type Language = {
   nativeName: string;
 };
 
-type RegionalBlocs = {
-  acronym: string;
-  name: string;
-  otherAcronyms: string[];
-  otherNames: string[];
-};
-
 type Country = {
   alpha2Code: string;
   alpha3Code: string;
-  altSpellings: string[];
-  area: number;
   borders: string[];
-  callingCodes: string[];
   capital: string;
-  cioc: string;
   currencies: Currency[];
-  demonym: string;
   flag: string;
-  gini: number;
   languages: Language[];
-  latlng: number[];
   name: string;
   nativeName: string;
-  numericCode: string;
   population: number;
   region: string;
-  regionalBlocs: RegionalBlocs[];
   subregion: string;
-  timezones: string[];
   topLevelDomain: string[];
-  translations: { [key: string]: string };
 };
 
 type InitialState = {
