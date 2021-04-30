@@ -23,10 +23,10 @@ export const getAll = (text: string, fields = initialFields) =>
   !text
     ? axios.get(`${REACT_APP_API_COUNTRIES}/all?fields=${fields.join(';')}`)
     : axios.get(
-        `${REACT_APP_API_COUNTRIES}/name/?fields=${text}${fields.join(';')}`
+        `${REACT_APP_API_COUNTRIES}/name/${text}?fields=${fields.join(';')}`
       );
 
 export const getAllByRegion = (region: string, fields = initialFields) =>
   axios.get(
-    `${REACT_APP_API_COUNTRIES}/region/?fields=${region}${fields.join(';')}`
+    `${REACT_APP_API_COUNTRIES}/region/${region}?fields=${fields.join(';')}`
   );
