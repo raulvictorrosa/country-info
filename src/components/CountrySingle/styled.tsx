@@ -35,6 +35,7 @@ export const TextBorderCountries: any = styled(Typography)`
 
 export const Img: any = styled.img`
   width: 100%;
+  max-width: 512px;
 `;
 
 export const ButtonBorders: any = styled(Button)`

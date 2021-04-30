@@ -75,10 +75,10 @@ const CountrySingle = ({ match }: any) => {
         justify="space-between"
         alignItems="flex-start"
       >
-        <Grid item xs={5}>
+        <Grid item xs={12} sm={5}>
           <Img src={country.flag} alt={country.name} />
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12} sm={5}>
           <Typography variant="h4">{country.name}</Typography>
           <Grid
             container
@@ -86,7 +86,7 @@ const CountrySingle = ({ match }: any) => {
             justify="space-between"
             alignItems="flex-start"
           >
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <ListInfo>
                 <ListItemInfo>
                   <ListItemText>Native Name: {country.nativeName}</ListItemText>
@@ -108,7 +108,7 @@ const CountrySingle = ({ match }: any) => {
               </ListInfo>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <ListInfo>
                 <ListItemInfo>
                   <ListItemText>
