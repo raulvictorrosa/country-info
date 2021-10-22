@@ -1,6 +1,6 @@
 import {
   Paper as PaperStyled,
-  TextField as TextFieldStyled
+  TextField as TextFieldStyled,
 } from '@material-ui/core';
 import styled from 'styled-components';
 

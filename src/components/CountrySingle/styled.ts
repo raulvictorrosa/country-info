@@ -6,39 +6,39 @@ import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 
-export const MainContainer: any = styled(Container)`
+export const MainContainer = styled(Container)`
   margin-top: 80px;
 `;
 
-export const GridCustom: any = styled(Grid)`
+export const GridCustom = styled(Grid)`
   margin-top: 80px;
 `;
 
-export const ListInfo: any = styled(List)`
+export const ListInfo = styled(List)`
   padding-top: 0;
   padding-bottom: 0;
 `;
 
-export const ListItemInfo: any = styled(ListItem)`
+export const ListItemInfo = styled(ListItem)`
   padding-top: 0;
   padding-right: 0;
   padding-bottom: 0;
   padding-left: 0;
 `;
 
-export const TextBorderCountries: any = styled(Typography)`
+export const TextBorderCountries = styled(Typography)`
   margin-right: 20px;
   vertical-align: top;
   top: 5px;
   position: relative;
 `;
 
-export const Img: any = styled.img`
+export const Img = styled.img`
   width: 100%;
   max-width: 512px;
 `;
 
-export const ButtonBorders: any = styled(Button)`
+export const ButtonBorders = styled(Button)`
   color: inherit;
   border: 1px solid;
   margin-right: 10px;
