@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useReducer } from 'react';
 import * as CountriesApi from '../api/countries';
 
@@ -43,7 +44,7 @@ const initialState = {
   isLoading: true,
   error: null,
   search: '',
-  filter: ''
+  filter: '',
 };
 
 type ReducerActionTypes =
@@ -83,12 +84,12 @@ const reducer = (
     }
     case 'GET_COUNTRIES_SEARCH': {
       return {
-        ...state
+        ...state,
       };
     }
     case 'GET_COUNTRIES_BY_REGION': {
       return {
-        ...state
+        ...state,
       };
     }
     case 'GET_COUNTRIES_SUCCESS': {
@@ -96,28 +97,28 @@ const reducer = (
         ...state,
         countries: action.payload.countries,
         isLoading: false,
-        error: null
+        error: null,
       };
     }
     case 'GET_COUNTRIES_ERROR': {
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error
+        error: action.payload.error,
       };
     }
     case 'SET_SEARCH_TEXT': {
       return {
         ...state,
         isLoading: false,
-        search: action.payload.search
+        search: action.payload.search,
       };
     }
     case 'SET_FILTER_TEXT': {
       return {
         ...state,
         isLoading: false,
-        filter: action.payload.filter
+        filter: action.payload.filter,
       };
     }
     default: {

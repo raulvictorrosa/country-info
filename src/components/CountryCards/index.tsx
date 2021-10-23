@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Grid from '@material-ui/core/Grid';
 import CountryCard from '../CountryCard';
 import { Container } from '../CountryCards/styled';

@@ -1,21 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { addCommas } from '../../utils';
 import { Card, Grid } from '../CountryCard/styled';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     media: {
-      height: 140
+      height: 140,
     },
     cardLink: {
       color: 'inherit',
-      textDecoration: 'none'
-    }
+      textDecoration: 'none',
+    },
   })
 );
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -14,7 +15,7 @@ import {
   ListInfo,
   ListItemInfo,
   MainContainer,
-  TextBorderCountries
+  TextBorderCountries,
 } from '../CountrySingle/styled';
 
 const initialState = {
@@ -28,10 +29,14 @@ const initialState = {
   population: 0,
   region: '',
   subregion: '',
-  topLevelDomain: []
+  topLevelDomain: [],
 };
 
-const CountrySingle = ({ match }: any) => {
+type CountrySingleType = {
+  match: any;
+};
+
+const CountrySingle = ({ match }: CountrySingleType) => {
   const [country, setCountry] = useState(initialState);
   const { borders } = country;
   const { id } = match.params;

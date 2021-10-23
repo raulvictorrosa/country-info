@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useContext, useMemo, useState } from 'react';
 
 type PaletteType = 'dark' | 'light';
@@ -8,8 +9,8 @@ type DarkLightThemeInitialValue = {
 };
 
 const darkLightThemeInitialValue = {
+  state: { themeMode: 'dark' as PaletteType },
   actions: { toggleTheme: () => {} },
-  state: { themeMode: 'dark' as PaletteType }
 };
 
 const DarkLightTheme = React.createContext<DarkLightThemeInitialValue>(
@@ -25,9 +26,9 @@ const DarkLightThemeProvider: React.FC = ({ children }) => {
         toggleTheme: () =>
           setThemeMode((previousValue) =>
             previousValue === 'light' ? 'dark' : 'light'
-          )
+          ),
       },
-      state: { themeMode }
+      state: { themeMode },
     }),
     [setThemeMode, themeMode]
   );

@@ -9,7 +9,7 @@ interface ThemeProviderProps {
 
 const MaterialUIProvider: React.FC<ThemeProviderProps> = ({
   children,
-  theme
+  theme,
 }) => {
   const { state } = useDarkLightTheme();
 

@@ -19,14 +19,16 @@ export const ListInfo = styled(List)`
   padding-bottom: 0;
 `;
 
-export const ListItemInfo = styled(ListItem)`
+export const ListItemInfo = styled(({ ...props }) => <ListItem {...props} />)`
   padding-top: 0;
   padding-right: 0;
   padding-bottom: 0;
   padding-left: 0;
 `;
 
-export const TextBorderCountries = styled(Typography)`
+export const TextBorderCountries = styled(({ ...props }) => (
+  <Typography {...props} />
+))`
   margin-right: 20px;
   vertical-align: top;
   top: 5px;
@@ -38,7 +40,7 @@ export const Img = styled.img`
   max-width: 512px;
 `;
 
-export const ButtonBorders = styled(Button)`
+export const ButtonBorders = styled(({ ...props }) => <Button {...props} />)`
   color: inherit;
   border: 1px solid;
   margin-right: 10px;

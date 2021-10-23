@@ -9,16 +9,16 @@ import { Paper } from '../SearchField/styled';
 const useStyles = makeStyles(() =>
   createStyles({
     inputRoot: {
-      width: '100%'
+      width: '100%',
     },
     searchForm: {
       paddingTop: '5px',
       paddingBottom: '5px',
-      display: 'flex'
+      display: 'flex',
     },
     searchIcon: {
-      padding: 10
-    }
+      padding: 10,
+    },
   })
 );
 
@@ -50,7 +50,7 @@ const SearchField: React.FC<SearchFieldProps> = ({ onSearch }) => {
         value={search}
         name="search"
         classes={{
-          root: classes.inputRoot
+          root: classes.inputRoot,
         }}
         placeholder="Search for a country..."
         inputProps={{ 'aria-label': 'Search for a country...' }}

@@ -4,38 +4,34 @@ import {
   createStyles,
   makeStyles,
   Theme,
-  useTheme
+  useTheme,
 } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-import styled from 'styled-components';
 import { useDarkLightTheme } from '../../providers/darkLightTheme';
+import { ThemeSwitcherTitle } from '../Header/styled';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
-      flexGrow: 1
+      flexGrow: 1,
     },
     sectionDesktop: {
       display: 'none',
       [theme.breakpoints.up('md')]: {
-        display: 'flex'
-      }
+        display: 'flex',
+      },
     },
     sectionMobile: {
       display: 'flex',
       [theme.breakpoints.up('md')]: {
-        display: 'none'
-      }
-    }
+        display: 'none',
+      },
+    },
   })
 );
-
-const ThemeSwitcherTitle: any = styled(Typography)`
-  padding: 0 5px;
-`;
 
 export default function Header() {
   const theme = useTheme();
