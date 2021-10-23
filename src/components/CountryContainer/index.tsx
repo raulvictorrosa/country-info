@@ -13,7 +13,6 @@ type ErrorType = {
 
 export default function CountryContainer() {
   const { state, actions } = useGetCountries();
-  console.log(state.countries);
 
   const renderMessage = (msg: string) => {
     return (

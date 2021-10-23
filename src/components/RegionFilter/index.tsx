@@ -12,7 +12,6 @@ const RegionFilter: React.FC<FilterFieldProps> = ({ onFilter }) => {
 
   useEffect(() => {
     if (filter) {
-      console.log({ filter });
       onFilter(filter);
     }
   }, [onFilter, filter]);
