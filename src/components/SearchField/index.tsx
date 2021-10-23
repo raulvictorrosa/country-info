@@ -32,7 +32,9 @@ const SearchField: React.FC<SearchFieldProps> = ({ onSearch }) => {
   const [textToSearch] = useDebounce(search, 1000);
 
   useEffect(() => {
-    onSearch(textToSearch);
+    if (textToSearch) {
+      onSearch(textToSearch);
+    }
   }, [onSearch, textToSearch]);
 
   return (

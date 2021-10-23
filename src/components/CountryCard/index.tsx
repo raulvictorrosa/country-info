@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { addCommas } from '../../utils';
 import { Card, Grid } from '../CountryCard/styled';
+import { Country } from '../../hooks/country';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -21,9 +22,13 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function CardCountry({ country, to }: any = {}) {
+type CountryCardProps = {
+  country: Country;
+};
+
+const CountryCard = ({ country }: CountryCardProps) => {
   const classes = useStyles();
-  const { name, population, region, capital, flag, alpha3Code } = country;
+  const { name, population, region, capital, flag, alpha2Code } = country;
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -31,7 +36,7 @@ export default function CardCountry({ country, to }: any = {}) {
         <CardActionArea>
           <Link
             className={classes.cardLink}
-            to={`/country/${alpha3Code.toLowerCase()}`}
+            to={`/country/${alpha2Code.toLowerCase()}`}
           >
             <CardMedia className={classes.media} image={flag} title={name} />
             <CardContent>
@@ -53,4 +58,6 @@ export default function CardCountry({ country, to }: any = {}) {
       </Card>
     </Grid>
   );
-}
+};
+
+export default CountryCard;

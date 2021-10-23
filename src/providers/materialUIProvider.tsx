@@ -1,5 +1,5 @@
 import { CssBaseline } from '@material-ui/core';
-import { createMuiTheme, Theme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, Theme, ThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
 import { useDarkLightTheme } from './darkLightTheme';
 
@@ -14,7 +14,7 @@ const MaterialUIProvider: React.FC<ThemeProviderProps> = ({
   const { state } = useDarkLightTheme();
 
   const memoizedTheme = React.useMemo(
-    () => createMuiTheme({ ...theme, palette: { type: state.themeMode } }),
+    () => createTheme({ ...theme, palette: { type: state.themeMode } }),
     [state.themeMode, theme]
   );
 

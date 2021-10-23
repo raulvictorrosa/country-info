@@ -1,35 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { AxiosResponse } from 'axios';
 import { useCallback, useEffect, useReducer } from 'react';
 import * as CountriesApi from '../api/countries';
-
-type Currency = {
-  code: string;
-  name: string;
-  symbol: string;
-};
-
-type Language = {
-  iso639_1: string;
-  iso639_2: string;
-  name: string;
-  nativeName: string;
-};
-
-type Country = {
-  alpha2Code: string;
-  alpha3Code: string;
-  borders: string[];
-  capital: string;
-  currencies: Currency[];
-  flag: string;
-  languages: Language[];
-  name: string;
-  nativeName: string;
-  population: number;
-  region: string;
-  subregion: string;
-  topLevelDomain: string[];
-};
+import { Country } from './country';
 
 type InitialState = {
   countries: Country[];
@@ -132,20 +105,23 @@ export const useGetCountries = () => {
 
   useEffect(() => {
     const fetchCountries = async () => {
-      let countries = [];
+      let countries: Country[] = [];
       try {
         if (state.search || !state.filter) {
           !state.search
             ? dispatch({ type: 'GET_COUNTRIES' })
             : dispatch({ type: 'GET_COUNTRIES_SEARCH' });
 
-          const { data }: any = await CountriesApi.getAll(state.search);
+          const { data }: AxiosResponse<Country[]> = await CountriesApi.getAll(
+            state.search
+          );
           countries = data;
         }
 
         if (state.filter) {
           dispatch({ type: 'GET_COUNTRIES_BY_REGION' });
-          const { data }: any = await CountriesApi.getAllByRegion(state.filter);
+          const { data }: AxiosResponse<Country[]> =
+            await CountriesApi.getAllByRegion(state.filter);
           countries = data;
         }
 

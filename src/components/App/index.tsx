@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import { Route, Switch } from 'react-router-dom';
 import Providers from '../../providers';
 import CountryContainer from '../CountryContainer';
@@ -6,7 +6,7 @@ import CountrySingle from '../CountrySingle';
 import Header from '../Header';
 
 const App: React.FC = () => {
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: 'dark',
     },

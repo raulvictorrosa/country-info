@@ -8,9 +8,14 @@ type FilterFieldProps = {
 };
 
 const RegionFilter: React.FC<FilterFieldProps> = ({ onFilter }) => {
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState<string | undefined>();
 
-  useEffect(() => onFilter(filter), [onFilter, filter]);
+  useEffect(() => {
+    if (filter) {
+      console.log({ filter });
+      onFilter(filter);
+    }
+  }, [onFilter, filter]);
 
   return (
     <Paper elevation={3}>

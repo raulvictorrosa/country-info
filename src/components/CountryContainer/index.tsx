@@ -1,12 +1,43 @@
 import Grid from '@material-ui/core/Grid';
+import React from 'react';
 import { useGetCountries } from '../../hooks/useGetCountries';
 import CountryCards from '../CountryCards';
 import { Container } from '../CountryContainer/styled';
 import RegionFilter from '../RegionFilter';
 import SearchField from '../SearchField';
 
+type ErrorType = {
+  status: number;
+  message: string;
+};
+
 export default function CountryContainer() {
   const { state, actions } = useGetCountries();
+  console.log(state.countries);
+
+  const renderMessage = (msg: string) => {
+    return (
+      <Grid
+        style={{ fontSize: '20px', marginTop: '70px', textAlign: 'center' }}
+      >
+        {msg}
+      </Grid>
+    );
+  };
+
+  const renderCountryCards = () => {
+    const { message } = state.countries as unknown as ErrorType;
+
+    if (state.isLoading) {
+      return renderMessage('Is Loading');
+    }
+    if (!state.isLoading && message) {
+      return renderMessage(message);
+    }
+    if (!state.isLoading && !state.error && state.countries.length > 0) {
+      return <CountryCards countries={state.countries} />;
+    }
+  };
 
   return (
     <>
@@ -14,7 +45,7 @@ export default function CountryContainer() {
         <Grid
           container
           direction="row"
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="flex-start"
         >
           <Grid item xs={12} sm={6} md={3}>
@@ -27,9 +58,7 @@ export default function CountryContainer() {
         </Grid>
       </Container>
 
-      {!state.error && !state.isLoading && (
-        <CountryCards countries={state.countries} />
-      )}
+      {renderCountryCards()}
     </>
   );
 }
